@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.wgg.essay.config.MsgCode;
 import com.wgg.essay.dto.user.UserDto;
 import com.wgg.essay.service.user.UserService;
 
@@ -16,7 +17,7 @@ public class UserRest{
 	@RequestMapping("login")
 	public UserDto login(UserDto dto){
 		userService.login(dto);
-		
+		dto.setMsgCode(MsgCode.REQUEST_SCCESS);
 		return dto;
 	}
 }

@@ -1,0 +1,1 @@
+package com.wgg.essay.service.user.impl;import org.springframework.stereotype.Service;import com.wgg.essay.dto.user.UserDto;import com.wgg.essay.service.user.UserService;@Servicepublic class UserServiceImpl implements UserService{	@Override	public void login(UserDto dto) {		dto.setToken("token");	}	}

@@ -3,8 +3,11 @@ package com.wgg.essay.dao;
 import com.wgg.essay.po.User;
 import com.wgg.essay.po.UserExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface UserMapper {
     long countByExample(UserExample example);
 
@@ -16,15 +19,32 @@ public interface UserMapper {
 
     int insertSelective(User record);
 
+    List<User> selectByExampleWithBLOBs(UserExample example);
+
     List<User> selectByExample(UserExample example);
 
     User selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example);
 
+    int updateByExampleWithBLOBs(@Param("record") User record, @Param("example") UserExample example);
+
     int updateByExample(@Param("record") User record, @Param("example") UserExample example);
 
     int updateByPrimaryKeySelective(User record);
 
+    int updateByPrimaryKeyWithBLOBs(User record);
+
     int updateByPrimaryKey(User record);
+
+    /**
+     * 
+    * @Title: findByAccount 
+    * @Description: 根据账号查询用户信息
+    * @param    
+    * @return User    
+    * @throws
+     */
+	User findByAccount(@Param("account") String account);
+
 }

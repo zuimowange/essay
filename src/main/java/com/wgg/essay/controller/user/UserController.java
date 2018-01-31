@@ -13,6 +13,12 @@ public class UserController{
 	
 	@Autowired PropertiesUtil propertiesUtil;
 	
+	@RequestMapping("register")
+	public String register(Model model){
+		model.addAttribute("baseHref", propertiesUtil.getBaseHref());
+		return "user/register";
+	}
+	
 	@RequestMapping("login")
 	public String login(Model model){
 		model.addAttribute("baseHref", propertiesUtil.getBaseHref());

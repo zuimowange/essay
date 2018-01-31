@@ -7,13 +7,13 @@ public class User {
 
     private String account;
 
+    private String pwd;
+
     private String name;
 
     private String sex;
 
     private Date birthday;
-
-    private String pwd;
 
     public Integer getId() {
         return id;
@@ -29,6 +29,14 @@ public class User {
 
     public void setAccount(String account) {
         this.account = account == null ? null : account.trim();
+    }
+
+    public String getPwd() {
+        return pwd;
+    }
+
+    public void setPwd(String pwd) {
+        this.pwd = pwd == null ? null : pwd.trim();
     }
 
     public String getName() {
@@ -53,13 +61,5 @@ public class User {
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
-    }
-
-    public String getPwd() {
-        return pwd;
-    }
-
-    public void setPwd(String pwd) {
-        this.pwd = pwd == null ? null : pwd.trim();
     }
 }

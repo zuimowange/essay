@@ -4,7 +4,9 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 import org.apache.commons.codec.binary.Hex;
+import org.springframework.stereotype.Service;
 
+@Service
 public class Md5Util {
 
 	/**

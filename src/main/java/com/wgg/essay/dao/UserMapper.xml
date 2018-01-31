@@ -4,12 +4,10 @@
   <resultMap id="BaseResultMap" type="com.wgg.essay.po.User">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="pwd" jdbcType="VARCHAR" property="pwd" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="sex" jdbcType="CHAR" property="sex" />
     <result column="birthday" jdbcType="DATE" property="birthday" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.wgg.essay.po.User">
-    <result column="pwd" jdbcType="LONGVARCHAR" property="pwd" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -70,27 +68,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, account, name, sex, birthday
+    id, account, pwd, name, sex, birthday
   </sql>
-  <sql id="Blob_Column_List">
-    pwd
-  </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.wgg.essay.po.UserExample" resultMap="ResultMapWithBLOBs">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from user
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByExample" parameterType="com.wgg.essay.po.UserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -105,11 +84,9 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from user
     where id = #{id,jdbcType=INTEGER}
   </select>
@@ -124,10 +101,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.wgg.essay.po.User">
-    insert into user (id, account, name, 
-      sex, birthday, pwd)
-    values (#{id,jdbcType=INTEGER}, #{account,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{sex,jdbcType=CHAR}, #{birthday,jdbcType=DATE}, #{pwd,jdbcType=LONGVARCHAR})
+    insert into user (id, account, pwd, 
+      name, sex, birthday)
+    values (#{id,jdbcType=INTEGER}, #{account,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{birthday,jdbcType=DATE})
   </insert>
   <insert id="insertSelective" parameterType="com.wgg.essay.po.User">
     insert into user
@@ -138,6 +115,9 @@
       <if test="account != null">
         account,
       </if>
+      <if test="pwd != null">
+        pwd,
+      </if>
       <if test="name != null">
         name,
       </if>
@@ -147,9 +127,6 @@
       <if test="birthday != null">
         birthday,
       </if>
-      <if test="pwd != null">
-        pwd,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -157,6 +134,9 @@
       </if>
       <if test="account != null">
         #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null">
+        #{pwd,jdbcType=VARCHAR},
       </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
@@ -166,9 +146,6 @@
       </if>
       <if test="birthday != null">
         #{birthday,jdbcType=DATE},
-      </if>
-      <if test="pwd != null">
-        #{pwd,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -187,6 +164,9 @@
       <if test="record.account != null">
         account = #{record.account,jdbcType=VARCHAR},
       </if>
+      <if test="record.pwd != null">
+        pwd = #{record.pwd,jdbcType=VARCHAR},
+      </if>
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
       </if>
@@ -196,22 +176,7 @@
       <if test="record.birthday != null">
         birthday = #{record.birthday,jdbcType=DATE},
       </if>
-      <if test="record.pwd != null">
-        pwd = #{record.pwd,jdbcType=LONGVARCHAR},
-      </if>
     </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map">
-    update user
-    set id = #{record.id,jdbcType=INTEGER},
-      account = #{record.account,jdbcType=VARCHAR},
-      name = #{record.name,jdbcType=VARCHAR},
-      sex = #{record.sex,jdbcType=CHAR},
-      birthday = #{record.birthday,jdbcType=DATE},
-      pwd = #{record.pwd,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -220,6 +185,7 @@
     update user
     set id = #{record.id,jdbcType=INTEGER},
       account = #{record.account,jdbcType=VARCHAR},
+      pwd = #{record.pwd,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
       sex = #{record.sex,jdbcType=CHAR},
       birthday = #{record.birthday,jdbcType=DATE}
@@ -233,6 +199,9 @@
       <if test="account != null">
         account = #{account,jdbcType=VARCHAR},
       </if>
+      <if test="pwd != null">
+        pwd = #{pwd,jdbcType=VARCHAR},
+      </if>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
@@ -242,32 +211,27 @@
       <if test="birthday != null">
         birthday = #{birthday,jdbcType=DATE},
       </if>
-      <if test="pwd != null">
-        pwd = #{pwd,jdbcType=LONGVARCHAR},
-      </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.wgg.essay.po.User">
-    update user
-    set account = #{account,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=CHAR},
-      birthday = #{birthday,jdbcType=DATE},
-      pwd = #{pwd,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.wgg.essay.po.User">
     update user
     set account = #{account,jdbcType=VARCHAR},
+      pwd = #{pwd,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=CHAR},
       birthday = #{birthday,jdbcType=DATE}
     where id = #{id,jdbcType=INTEGER}
   </update>
   
-  
-  <select id="findByAccount" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+  <!-- 根据account查询user表 -->
+  <select id="findByAccount" parameterType="java.lang.String" resultMap="BaseResultMap">
   	select * from user where account = #{account}
   </select>
+  
+  <!-- 注册 -->
+  <insert id="reg" useGeneratedKeys="true" keyProperty="id" parameterType="com.wgg.essay.po.User">
+  	insert into user(account,pwd) values(#{account},#{pwd})
+  </insert>
+  
 </mapper>

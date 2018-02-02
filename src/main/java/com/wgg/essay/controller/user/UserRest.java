@@ -1,18 +1,36 @@
 package com.wgg.essay.controller.user;
 
+import java.util.Calendar;
+import java.util.Date;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wgg.essay.config.MsgCode;
 import com.wgg.essay.dto.user.UserDto;
+import com.wgg.essay.po.Token;
 import com.wgg.essay.service.user.UserService;
+import com.wgg.essay.utils.Base64Util;
+import com.wgg.essay.utils.CookiesUtil;
+import com.wgg.essay.utils.DateUtil;
+import com.wgg.essay.utils.Md5Util;
+
+import net.sf.json.JSONObject;
 
 @RestController
 @RequestMapping("userRest")
 public class UserRest{
 	
 	@Autowired UserService userService;
+	@Autowired Md5Util md5Util;
+	@Autowired DateUtil dateUtil;
+	@Autowired Base64Util base64Util;
+	@Autowired CookiesUtil cookiesUtil;
 	
 	
 	@RequestMapping("reg")
@@ -37,10 +55,21 @@ public class UserRest{
 	}
 	
 	@RequestMapping("login")
-	public UserDto login(UserDto dto){
+	public UserDto login(UserDto dto,HttpServletResponse response,HttpServletRequest request){
 		try {
-			boolean flag = userService.login(dto);
-			if(flag) {
+			Integer userId = userService.login(dto);
+			if(userId > 0) {
+				
+				//生成token
+				Date iat = new Date();
+				Date exp = dateUtil.changeDate(iat, Calendar.DATE, 10);				
+				Token token = new Token(userId,dateUtil.dateToStamp(iat),dateUtil.dateToStamp(exp),"1","本平台登录",null);
+				JSONObject map = JSONObject.fromObject(token);
+				//token加密
+				String tokens = base64Util.base64Encoder(map.toString());
+				//将token存入cookie
+				cookiesUtil.setCookie(response, "token", "111111", 1000000);
+				
 				dto.setMsgCode(MsgCode.REQUEST_SCCESS);
 				dto.setMsg("登录成功");
 			}

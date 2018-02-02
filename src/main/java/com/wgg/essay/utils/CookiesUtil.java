@@ -1,4 +1,4 @@
-package com.wgg.essay.config;
+package com.wgg.essay.utils;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -9,6 +9,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class CookiesUtil{
 
 	/**

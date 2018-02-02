@@ -6,7 +6,7 @@ import com.wgg.essay.dto.user.UserDto;
 @Service
 public interface UserService{
 
-	boolean login(UserDto dto);
+	Integer login(UserDto dto);
 
 	Integer reg(UserDto dto);
 	

@@ -1,4 +1,4 @@
-package com.wgg.essay.config;
+package com.wgg.essay.utils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

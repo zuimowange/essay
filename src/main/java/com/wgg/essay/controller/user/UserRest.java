@@ -58,7 +58,7 @@ public class UserRest{
 	public UserDto login(UserDto dto,HttpServletResponse response,HttpServletRequest request){
 		try {
 			Integer userId = userService.login(dto);
-			if(userId > 0) {
+			if(userId != null) {
 				
 				//生成token
 				Date iat = new Date();
@@ -67,8 +67,7 @@ public class UserRest{
 				JSONObject map = JSONObject.fromObject(token);
 				//token加密
 				String tokens = base64Util.base64Encoder(map.toString());
-				//将token存入cookie
-				cookiesUtil.setCookie(response, "token", "111111", 1000000);
+				dto.setToken(tokens);
 				
 				dto.setMsgCode(MsgCode.REQUEST_SCCESS);
 				dto.setMsg("登录成功");

@@ -9,9 +9,8 @@ $("#loginBtn").click(function(){
 			"po.pwd":pwd
 		},
 		success:function(data){
-			/*CookieUtil.set("token",data.token)
-			alert(CookieUtil.get("token"))*/
-			alert(CookieUtil.get("token"))
+			CookieUtil.set("token",data.token);
+			alert(data.msg);
 		}
 	});
 })

@@ -10,4 +10,13 @@ public class UserDto extends AbstractBaseDto<User>{
 	*/ 
 	private static final long serialVersionUID = -7884291922588131869L;
 	
+	private String token;
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
 }

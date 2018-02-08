@@ -10,7 +10,8 @@ public class TokenInterceptor implements HandlerInterceptor{
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object object) throws Exception {
-		// TODO Auto-generated method stub
+		
+		
 		return true;
 	}
 	

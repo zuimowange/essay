@@ -15,6 +15,8 @@ public class User {
 
     private Date birthday;
 
+    private String email;
+
     public Integer getId() {
         return id;
     }
@@ -61,5 +63,13 @@ public class User {
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email == null ? null : email.trim();
     }
 }

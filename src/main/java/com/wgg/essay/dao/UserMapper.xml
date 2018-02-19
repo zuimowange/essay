@@ -8,6 +8,7 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="sex" jdbcType="CHAR" property="sex" />
     <result column="birthday" jdbcType="DATE" property="birthday" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, account, pwd, name, sex, birthday
+    id, account, pwd, name, sex, birthday, email
   </sql>
   <select id="selectByExample" parameterType="com.wgg.essay.po.UserExample" resultMap="BaseResultMap">
     select
@@ -102,9 +103,11 @@
   </delete>
   <insert id="insert" parameterType="com.wgg.essay.po.User">
     insert into user (id, account, pwd, 
-      name, sex, birthday)
+      name, sex, birthday, email
+      )
     values (#{id,jdbcType=INTEGER}, #{account,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, 
-      #{name,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{birthday,jdbcType=DATE})
+      #{name,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{birthday,jdbcType=DATE}, #{email,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.wgg.essay.po.User">
     insert into user
@@ -127,6 +130,9 @@
       <if test="birthday != null">
         birthday,
       </if>
+      <if test="email != null">
+        email,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -146,6 +152,9 @@
       </if>
       <if test="birthday != null">
         #{birthday,jdbcType=DATE},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -176,6 +185,9 @@
       <if test="record.birthday != null">
         birthday = #{record.birthday,jdbcType=DATE},
       </if>
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -188,7 +200,8 @@
       pwd = #{record.pwd,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
       sex = #{record.sex,jdbcType=CHAR},
-      birthday = #{record.birthday,jdbcType=DATE}
+      birthday = #{record.birthday,jdbcType=DATE},
+      email = #{record.email,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -211,6 +224,9 @@
       <if test="birthday != null">
         birthday = #{birthday,jdbcType=DATE},
       </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -220,7 +236,8 @@
       pwd = #{pwd,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=CHAR},
-      birthday = #{birthday,jdbcType=DATE}
+      birthday = #{birthday,jdbcType=DATE},
+      email = #{email,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   

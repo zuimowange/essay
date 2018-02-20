@@ -44,7 +44,7 @@ public class UserRest{
 			}
 			else {
 				dto.setMsgCode(MsgCode.REQUEST_FALSE);
-				dto.setMsg("注册失败");
+				dto.setMsg("注册失败，该账号已存在");
 			}
 		} catch (Exception e) {
 			dto.setMsgCode(MsgCode.SERVER_ERROR);

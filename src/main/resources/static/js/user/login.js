@@ -35,7 +35,7 @@ $("#loginBtn").click(function(){
 			}
 			else{
 				layer.msg(data.msg, {icon: 5},function(){
-					location.href = "/user/register";
+					/*location.href = "/user/register";*/
 				});
 			}
 		}

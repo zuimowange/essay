@@ -5,7 +5,7 @@ import java.util.Date;
 public class User {
     private Integer id;
 
-    private String account;
+    private String telephone;
 
     private String pwd;
 
@@ -17,6 +17,8 @@ public class User {
 
     private String email;
 
+    private String account;
+
     public Integer getId() {
         return id;
     }
@@ -25,12 +27,12 @@ public class User {
         this.id = id;
     }
 
-    public String getAccount() {
-        return account;
+    public String getTelephone() {
+        return telephone;
     }
 
-    public void setAccount(String account) {
-        this.account = account == null ? null : account.trim();
+    public void setTelephone(String telephone) {
+        this.telephone = telephone == null ? null : telephone.trim();
     }
 
     public String getPwd() {
@@ -71,5 +73,13 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email == null ? null : email.trim();
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account == null ? null : account.trim();
     }
 }

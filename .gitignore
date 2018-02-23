@@ -27,3 +27,4 @@ nbdist/
 
 ### 自定义配置 ###
 src/test/
+/log

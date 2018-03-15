@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>挽氏家族</title>
+		<base th:href="${baseHref}" href="http://127.0.0.1:8020/resources/static/"/>
+		<link rel="stylesheet" href="layui/css/layui.css" />
+		<link rel="stylesheet" href="css/main/index.css" />
+	</head>
+	<body>
+		<div class="header">
+				
+			<div>
+				<a class="logo" href><img src="img/login_bg.jpg"/></a>
+				<input class="search" placeholder="请输入" />
+			</div>
+			<ul class="layui-nav nav-top">
+				<li class="layui-nav-item">
+					<a href>第一个导航</a>
+				</li>
+				<li class="layui-nav-item layui-this">
+					<a href>第二个导航</a>
+				</li>
+				<li class="layui-nav-item">
+					<a class="javascript:;" href="javascript:;">第三个导航</a>
+					<dl class="layui-nav-child">
+						<dd><a href="/demo/">调试预览</a></dd>
+						<dd><a href="/demo/">调试预览</a></dd>
+					</dl>
+				</li>
+				<li class="layui-nav-item layui-hide-xs">
+					<a href>消息<span class="layui-badge-dot"></span></a>
+				</li>
+			</ul>
+		</div>
+		
+		<div class="nav-left layui-bg-black">
+			<ul class="layui-nav layui-nav-tree">
+			<li class="layui-nav-item">
+				<a href>第一个导航</a>
+			</li>
+			<li class="layui-nav-item layui-this">
+				<a href>第二个导航</a>
+			</li>
+			<li class="layui-nav-item">
+				<a class="javascript:;" href="javascript:;">第三个导航</a>
+				<dl class="layui-nav-child">
+					<dd><a href="/demo/">调试预览</a></dd>
+					<dd><a href="/demo/">调试预览</a></dd>
+				</dl>
+			</li>
+		</ul>
+		</div>
+		
+		<div class="content">
+			<iframe src="/user/login"></iframe>
+		</div>
+		
+	</body>
+	<script type="text/javascript" src="layui/layui.all.js" ></script>
+</html>

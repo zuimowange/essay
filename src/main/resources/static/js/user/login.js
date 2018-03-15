@@ -30,7 +30,8 @@ $("#loginBtn").click(function(){
 			CookieUtil.set("token",data.token);
 			if(data.msgCode == 1){
 				layer.msg(data.msg, {icon: 6},function(){
-					location.href = "/user/register";
+					//location.href = "/user/register";
+					location.href = "/";
 				});
 			}
 			else{
